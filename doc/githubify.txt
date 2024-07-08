@@ -8,18 +8,13 @@ within vim, while browsing files. It defines a vim function |Githubify| (and
 associated command !Githubify), which accepts the following arguments (all
 optional).
 
-    - lineno (integer): Nonzero will include the current line number in the
-      permalink, zero will exclude the line number. By default, line number is
-      included.
-
     - commit (string): The commit hash (or branch identifier) to link to. By
       default, uses HEAD (the current branch).
 
-    - base_url (string): The base URL of the Github repository. By default,
-      uses the value of the environment variable $GITHUBIFY_BASE_URL. Note: if
-      neither this argument nor the enivronment variable are specified, the
-      function will fail.
+    - use_lineno (integer): Nonzero will include the current line number in the
+      permalink, zero will exclude the line number. By default, line number is
+      included.
 
-    - base_dir (string): The base directory of the repository on the local
-      filesystem. By default, will use the current working directory of the vim
-      session.
+    - base_url (string): The base URL of the Github repository. By default, uses
+      the url of the 'origin' remote of the file's git repo. Note: if neither
+      this argument nor the remote are specified, the function will fail.

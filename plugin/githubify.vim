@@ -14,10 +14,15 @@ import vim
 # Grab arguments passed to the vimscript function.
 
 num_args = int(vim.eval('a:0'))
-assert num_args <= 4
+assert num_args <= 3
 
 if num_args >= 1:
-    use_lineno = int(vim.eval('a:1'))
+    commit = vim.eval('a:1')
+else:
+    commit = None
+
+if num_args >= 2:
+    use_lineno = int(vim.eval('a:2'))
 else:
     use_lineno = True
 if use_lineno:
@@ -25,20 +30,10 @@ if use_lineno:
 else:
     lineno = None
 
-if num_args >= 2:
-    commit = vim.eval('a:2')
-else:
-    commit = None
-
 if num_args >= 3:
     base_url = vim.eval('a:3')
 else:
     base_url = None
-
-if num_args >= 4:
-    base_dir = vim.eval('a:4')
-else:
-    base_dir = None
 
 # Load our githubify script.
 
@@ -52,8 +47,7 @@ import githubify
 
 url = githubify.githubify(
     abs_filename=vim.current.buffer.name,
-    lineno=lineno, commit=commit, base_url=base_url,
-    base_dir=base_dir)
+    lineno=lineno, commit=commit, base_url=base_url)
 
 print(url)
 try:

@@ -6,7 +6,7 @@ location in vim.
 ## Requirements
 
 If running in neovim, you must set up python integration (see |:help
-provider-python|).
+provider-python|). You must also have 'git' installed on the machine.
 
 To utilize the copy-to-clipboard functionality, you must install the `pyperclip`
 module:
