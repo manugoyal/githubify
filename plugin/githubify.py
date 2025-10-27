@@ -1,6 +1,7 @@
 import os
 import os.path
 import subprocess
+import urllib.parse
 
 
 def _sanitize_origin_url(url):
@@ -25,4 +26,6 @@ def githubify(abs_filename, commit=None, lineno=None, base_url=None):
 
     rel_filename = subprocess.check_output(['git', 'ls-files', '--full-name', abs_filename], cwd=cwd).decode('utf-8').strip()
     lineno_str = '#L{}'.format(lineno) if lineno is not None else ''
-    return '{}/blob/{}/{}{}'.format(base_url, commit_sha, rel_filename, lineno_str)
+    # URL-encode the relative filename to handle special characters and spaces
+    encoded_filename = urllib.parse.quote(rel_filename)
+    return '{}/blob/{}/{}{}'.format(base_url, commit_sha, encoded_filename, lineno_str)
