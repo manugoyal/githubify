@@ -1,20 +1,34 @@
 *githubify.txt* githubify
 
-GITHUBIFY
-=================================================================================
+githubify
+================================================================================
 
-The purpose of this plugin is to make it easy to create Github permalinks from
-within vim, while browsing files. It defines a vim function |Githubify| (and
-associated command !Githubify), which accepts the following arguments (all
-optional).
+Generate GitHub permalinks from the current Neovim buffer.
 
-    - commit (string): The commit hash (or branch identifier) to link to. By
-      default, uses HEAD (the current branch).
+This plugin is Neovim-only.
 
-    - use_lineno (integer): Nonzero will include the current line number in the
-      permalink, zero will exclude the line number. By default, line number is
-      included.
+SETUP
 
-    - base_url (string): The base URL of the Github repository. By default, uses
-      the url of the 'origin' remote of the file's git repo. Note: if neither
-      this argument nor the remote are specified, the function will fail.
+    Call setup() in your Neovim config:
+
+>
+    require("githubify").setup()
+<
+
+                                                               *:Githubify*
+:Githubify [commit] [use_lineno] [base_url]
+
+    Optional positional args:
+
+    - commit (string): revision to resolve, defaults to HEAD.
+    - use_lineno (number): nonzero includes #L<line>, 0 omits line number.
+      Defaults to include.
+    - base_url (string): override repo base URL. By default uses
+      `git remote get-url origin`.
+
+    Side effects:
+    - Prints the URL
+    - Copies URL to `+` and `*` registers
+
+Legacy Python version is available at commit:
+6789f71185d4ceb2ac352ac5722de3cb5f2ae68d
